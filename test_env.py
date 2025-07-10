@@ -1,21 +1,11 @@
-import gym
-import gym_puyopuyo
+from gym_puyopuyo import register
+from gym import make
 
-# Create the Puyo Puyo environment
-env = gym.make('PuyoPuyoEndlessNormal-v2')
+register()
 
-# Reset the environment to the initial state
-state = env.reset()
+small_env = make("PuyoPuyoEndlessSmall-v2")
 
-# Take a random action
-action = env.action_space.sample()
+for i in range(10):
+    small_env.step(small_env.action_space.sample())
 
-# Step through the environment with the chosen action
-next_state, reward, done, info = env.step(action)
-
-print(f"Next State: {next_state}")
-print(f"Reward: {reward}")
-print(f"Done: {done}")
-print(f"Info: {info}")
-
-env.close()
+small_env.render()
